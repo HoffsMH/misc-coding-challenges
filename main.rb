@@ -56,6 +56,26 @@ def best_way(arr)
   end
 end
 
+def bestest_way(arr)
+  before_accum = 1
+  after_accum = 1
+  before = [1]
+  output_arr = []
+
+  arr.each.with_index do |element, index|
+    before_accum *= element
+    before.push(before_accum)
+  end
+  before.pop
+  before.reverse!
+  
+  arr.reverse.each.with_index do |element, index|
+    output_arr.push(after_accum * before[index])
+    after_accum *= element
+  end
+  output_arr.reverse
+
+end
 
 binding.pry
 puts "we are done"
