@@ -32,12 +32,11 @@ end
 def find_rotation2(word_arr, index=0)
   middle_index = (word_arr.length - 1) / 2
   middle_element = word_arr[middle_index]
+  if (word_arr.length == 2) || (word_arr[middle_index - 1] > middle_element)
+    return index + middle_index
+  end
   if middle_element < word_arr.first
-    if (word_arr.length == 2) || (word_arr[middle_index - 1] > middle_element)
-      return index + middle_index
-    else
       find_rotation2(word_arr[0..middle_index], index )
-    end
   else
     find_rotation2(word_arr[middle_index..-1], (index + middle_index))
   end
