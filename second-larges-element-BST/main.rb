@@ -41,22 +41,16 @@ arr.each do |element|
 end
 
 def find_second_largest(node, largest_found=false)
-  if node.right &&  !node.right.right #we found the largest element
-    if !node.right.left #the largest element doesn't have a left
-      return node
-    else
-      find_second_largest(node.right.left, true)
-    end
-  elsif !node.right && largest_found
-    return node
-  elsif node.right && largest_found
-    find_second_largest(node.right, true)
-  elsif !node.right && node.left #we are in a really small tree
-    return node.left
-  elsif !node.right && !node.left #we are in a really small tree
-    return node
+  if largest_found
+    return node if !node.right
+    return find_second_largest(node.right, true)
+  end
+
+  if !largest_found && !node.right.right
+    return node if !node.right.left
+    return find_second_largest(node.right.left, true) if node.right.left
   else
-    find_second_largest(node.right)
+    return find_second_largest(node.right)
   end
 end
 
