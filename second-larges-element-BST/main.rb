@@ -41,8 +41,10 @@ arr.each do |element|
 end
 
 def find_second_largest(node, largest_found=false)
+  return node.left if !node.right && node.left && !largest_found
+  return node if !node.right
+
   if largest_found
-    return node if !node.right
     return find_second_largest(node.right, true)
   end
 
